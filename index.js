@@ -75,21 +75,21 @@ async function run() {
 
     app.post('/jwt', async (req, res) => {
       const user = req.body;
-    //   console.log(user)
+    
       const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '8h' });
       res.send({ token })
     })
 
-    const verifyHR = async (req, res, next) => {
-      const email = req.decoded.email;
-      const query = { email: email };
-      const user = await userCollection.findOne(query);
-      const isHr = user?.role === 'HR';
-      if (!isHr) {
-        return res.status(403).send({ message: 'forbidden-access' })
-      }
-      next();
-    }
+    // const verifyHR = async (req, res, next) => {
+    //   const email = req.decoded.email;
+    //   const query = { email: email };
+    //   const user = await userCollection.findOne(query);
+    //   const isHr = user?.role === 'HR';
+    //   if (!isHr) {
+    //     return res.status(403).send({ message: 'forbidden-access' })
+    //   }
+    //   next();
+    // }
 
 
 
